@@ -63,9 +63,7 @@ $(window).on( 'popstate beforeunload', function(event) {
 ```
 
 ```scss
-/*
-    *= require animate
-*/
+@import "animate"
 ```
 
 To use turbolinks-animate, replace the `body` tag in your layout with the `turbolinks_animate_body` view helper:
