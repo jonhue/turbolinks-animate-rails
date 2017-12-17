@@ -45,10 +45,27 @@ gem 'turbolinks-animate', github: 'jonhue/turbolinks-animate'
 
 ## Usage
 
-The javascript files will be added to the asset pipeline and available for you to use:
+The javascript and CSS files will be added to the asset pipeline and are available for you to use:
 
 ```js
 //= require turbolinks-animate
+
+$(document).on( 'turbolinks:load', function() {
+    $('body').turbolinksAnimate();
+    turbolinksAnimateAppear();
+});
+$(document).on( 'turbolinks:request-start', function() {
+    turbolinksAnimateDisappear();
+});
+$(window).on( 'popstate beforeunload', function(event) {
+    turbolinksAnimateDisappear();
+});
+```
+
+```scss
+/*
+    *= require animate
+*/
 ```
 
 To use turbolinks-animate, replace the `body` tag in your layout with the `turbolinks_animate_body` view helper:
@@ -69,7 +86,7 @@ class WelcomeController < ApplicationController
     end
 
     def more
-        turbolinks_animate { desktop: 'fadein', mobile: 'fadeinright' }
+        turbolinks_animate({ desktop: 'fadein', mobile: 'fadeinright' })
     end
 end
 ```
