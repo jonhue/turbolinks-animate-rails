@@ -94,6 +94,7 @@ end
 ## To Do
 
 [Here](https://github.com/jonhue/turbolinks-animate/projects/1) is the full list of current projects.
+
 To propose your ideas, initiate the discussion by adding a [new issue](https://github.com/jonhue/turbolinks-animate/issues/new).
 
 ---
