@@ -23,7 +23,7 @@ This gem extends the [turbolinks-animate.js](https://github.com/jonhue/turbolink
 
 ## Installation
 
-`turbolinks-animate` works with Rails 4.0 onwards. You can add it to your `Gemfile` with:
+`turbolinks-animate` works with Rails 5 onwards. You can add it to your `Gemfile` with:
 
 ```ruby
 gem 'turbolinks-animate'

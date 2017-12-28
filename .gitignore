@@ -1,9 +1,8 @@
-/.bundle/
-/.yardoc
-/_yardoc/
-/coverage/
-/doc/
-/pkg/
-/spec/reports/
-/tmp/
-/*.gem
+test/debug.log
+coverage
+rdoc
+memory
+*.gem
+.rvmrc
+Gemfile.lock
+log

@@ -15,8 +15,10 @@ Gem::Specification.new do |gem|
     gem.files = `git ls-files`.split("\n")
     gem.require_paths = ['lib']
 
-    gem.add_development_dependency 'bundler', '~> 1.16'
-    gem.add_development_dependency 'rake', '~> 10.0'
-    gem.add_dependency 'railties', '>= 4.0'
     gem.required_ruby_version = '>= 2.3'
+
+    gem.add_dependency 'railties', '>= 5.0'
+
+    gem.add_development_dependency 'rspec', '~> 3.7'
+    gem.add_development_dependency 'rubocop', '~> 0.52'
 end
