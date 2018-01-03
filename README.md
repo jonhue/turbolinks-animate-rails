@@ -68,7 +68,9 @@ $(window).on( 'popstate beforeunload', function(event) {
 
 **Note:** When using a package manager like Yarn, make sure to fetch the latest version instead:
 
-   $ yarn install turbolinks-animate
+```
+$ yarn install turbolinks-animate
+```
 
 To use turbolinks-animate, replace the `body` tag in your layout with the `turbolinks_animate_body` view helper:
 
