@@ -1,10 +1,10 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.4
+ * @version 1.3.8
  * @license
  * MIT License
  *
- * Copyright (c) 2017 Slooob
+ * Copyright (c) 2017 Jonas Hübotter
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ $.fn.extend({
 });
 
 
-var turbolinksAnimateData = {}, turbolinksAnimateInline = false, turbolinksAnimateElement;
+var turbolinksAnimateData = {}, turbolinksAnimateInline = false, turbolinksAnimateElement, turbolinksAnimateElements;
 
 function turbolinksAnimateInit( el, options ) {
     var turbolinksAnimatePreviousType = turbolinksAnimateData['type'],
@@ -57,11 +57,11 @@ function turbolinksAnimateInit( el, options ) {
     turbolinksAnimateData['appear'] = turbolinksAnimateAppear;
     turbolinksAnimateData['previousType'] = turbolinksAnimatePreviousType;
     $('a, button').click( function() {
-        turbolinksAnimateData['animation'] = $(this).data('turbolinks-animate-animation');
         if ( $(this).data('turbolinks-animate-animation') !== undefined ) { turbolinksAnimateInline = true };
+        turbolinksAnimateData['animation'] = $(this).data('turbolinks-animate-animation') || options.animation;
         turbolinksAnimateData['appear'] = $(this).data('turbolinks-animate-appear');
-        turbolinksAnimateData['duration'] = $(this).data('turbolinks-animate-duration');
-        turbolinksAnimateData['delay'] = $(this).data('turbolinks-animate-delay');
+        turbolinksAnimateData['duration'] = $(this).data('turbolinks-animate-duration') || options.duration;
+        turbolinksAnimateData['delay'] = $(this).data('turbolinks-animate-delay') || options.delay;
         turbolinksAnimateData['type'] = $(this).data('turbolinks-animate-type');
     });
 };
@@ -82,7 +82,7 @@ function turbolinksAnimateToggle(disappears) {
         turbolinksAnimateReset();
         turbolinksAnimateOptions();
 
-        Turbolinks.clearCache() // fix for cache issues
+        Turbolinks.clearCache() // fix cache issues
         turbolinksAnimateAnimateElements(disappears);
     };
 };
@@ -90,31 +90,63 @@ function turbolinksAnimateToggle(disappears) {
 
 
 function turbolinksAnimateGetAnimation(disappears) {
-    return ( disappears == false ? turbolinksAnimateData['appear'] : undefined ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
+    var animation;
+    if (!disappears) { animation = turbolinksAnimateData['appear'] };
+    if (turbolinksAnimateInline) {
+        animation = turbolinksAnimateData['animation']
+    } else if ( typeof turbolinksAnimateElement.data('turbolinks-animate-animation') !== 'undefined' ) {
+        animation = turbolinksAnimateElement.data('turbolinks-animate-animation')
+    } else {
+        animation = turbolinksAnimateData['animation'];
+    };
+    return animation;
 };
 
 function turbolinksAnimateOptions() {
-    turbolinksAnimateElement.css({ 'animation-duration': turbolinksAnimateData['duration'] });
+    turbolinksAnimateElement.css('animationDuration', turbolinksAnimateData['duration']);
     if (turbolinksAnimateData['delay'] != false) {
-        turbolinksAnimateElement.css({ 'animation-delay': turbolinksAnimateData['delay'] });
+        turbolinksAnimateElement.css('animationDelay', turbolinksAnimateData['delay']);
+    };
+    if ( typeof turbolinksAnimateElements !== 'undefined' ) {
+        $(turbolinksAnimateElements).each(function() {
+            $(this).css('animationDuration', turbolinksAnimateData['duration']);
+            if (turbolinksAnimateData['delay'] != false) {
+                $(this).css('animationDelay', turbolinksAnimateData['delay']);
+            };
+        });
     };
 };
 
 function turbolinksAnimateReset() {
-    turbolinksAnimateElement.removeClass('fadeIn fadeInUp fadeInDown fadeInLeft fadeInRightfadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight');
+    var classes = 'fadeIn fadeInUp fadeInDown fadeInLeft fadeInRightfadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight';
+    if ( typeof turbolinksAnimateElements !== 'undefined' ) {
+        $(turbolinksAnimateElements).each(function() {
+            $(this).removeClass(classes);
+        });
+    };
+    turbolinksAnimateElement.removeClass(classes);
 };
 
 
 
 function turbolinksAnimateAnimateElements(disappears) {
     if ( turbolinksAnimateElement.find('[data-turbolinks-animate-persist]').length > 0 || turbolinksAnimateElement.find('[data-turbolinks-animate-persist-itself]').length > 0 ) {
-        var turbolinksAnimateElements = turbolinksAnimateGetElements();
+        turbolinksAnimateElements = turbolinksAnimateGetElements();
         $(turbolinksAnimateElements).each(function() {
+            $(this).one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+                setTimeout(function() {
+                    turbolinksAnimateReset();
+                }, 250);
+            });
             $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
         });
-    } else {
-        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
     };
+    turbolinksAnimateElement.one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+        setTimeout(function() {
+            turbolinksAnimateReset();
+        }, 250);
+    });
+    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
 
     delete turbolinksAnimateData['previousType'];
     turbolinksAnimateInline = false;

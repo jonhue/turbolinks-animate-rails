@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
     gem.description = 'A dead simple & powerful way of adding rich & adaptive animations to your Rails app which is already using Turbolinks™.'
     gem.homepage = 'https://github.com/jonhue/turbolinks-animate'
 
-    gem.files = `git ls-files`.split("\n")
+    gem.files = Dir['README.md', 'CHANGELOG.md', 'LICENSE', 'lib/**/*', 'app/**/*', 'vendor/**/*']
     gem.require_paths = ['lib']
 
     gem.required_ruby_version = '>= 2.3'

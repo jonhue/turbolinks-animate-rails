@@ -1,6 +1,8 @@
 require 'turbolinks-animate/version'
 
 module TurbolinksAnimate
-    class Engine < ::Rails::Engine
-    end
+
+    require 'turbolinks-animate/engine'
+    require 'turbolinks-animate/railtie'
+
 end

@@ -73,12 +73,10 @@ To use turbolinks-animate, replace the `body` tag in your layout with the `turbo
     = yield
 ```
 
-In your controller simply include the `TurbolinksAnimateHelper` module, and specify your animation.
+In your controller simply the animation:
 
 ```ruby
 class WelcomeController < ApplicationController
-    include TurbolinksAnimateHelper
-
     def index
         turbolinks_animate 'fadein'
     end
