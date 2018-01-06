@@ -51,7 +51,7 @@ The javascript and CSS files will be added to the asset pipeline and are availab
 //= require turbolinks-animate
 
 $(document).on( 'turbolinks:load', function() {
-    $('body').turbolinksAnimate();
+    $('body.turbolinks-animate').turbolinksAnimate();
     turbolinksAnimateAppear();
 });
 $(document).on( 'turbolinks:request-start', function() {
@@ -64,6 +64,12 @@ $(window).on( 'popstate beforeunload', function(event) {
 
 ```scss
 @import "animate"
+```
+
+**Note:** When using a package manager like Yarn, make sure to fetch the latest version instead:
+
+```
+$ yarn install turbolinks-animate
 ```
 
 To use turbolinks-animate, replace the `body` tag in your layout with the `turbolinks_animate_body` view helper:
