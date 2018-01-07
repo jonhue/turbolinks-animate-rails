@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
     gem.name = 'turbolinks-animate'
     gem.version = TurbolinksAnimate::VERSION
     gem.authors = ['Jonas Hübotter']
-    gem.email = ['jonas.huebotter@gmail.com']
+    gem.email = ['me@jonhue.me']
 
     gem.summary = 'Rich & adaptive animations for apps using Rails w/ Turbolinks™'
     gem.description = 'A dead simple & powerful way of adding rich & adaptive animations to your Rails app which is already using Turbolinks™.'
