@@ -52,14 +52,7 @@ The javascript and CSS files will be added to the asset pipeline and are availab
 //= require turbolinks-animate
 
 $(document).on( 'turbolinks:load', function() {
-    $('body.turbolinks-animate').turbolinksAnimate();
-    turbolinksAnimateAppear();
-});
-$(document).on( 'turbolinks:request-start', function() {
-    turbolinksAnimateDisappear();
-});
-$(window).on( 'popstate beforeunload', function(event) {
-    turbolinksAnimateDisappear();
+    TurbolinksAnimate.init();
 });
 ```
 
