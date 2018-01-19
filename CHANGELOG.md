@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.3.0 - 2018-01-19
+
+* enhancements
+    * updated [turbolinks-animate.js](https://github.com/jonhue/turbolinks-animate.js) to `2.0.0`
+
 ### 1.2.0 - 2018-01-06
 
 * enhancements
