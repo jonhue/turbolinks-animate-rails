@@ -17,6 +17,7 @@ This gem extends the [turbolinks-animate.js](https://github.com/jonhue/turbolink
 * [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
+    * [Semantic versioning](#semantic-versioning)
 * [License](#license)
 
 ---
@@ -51,14 +52,7 @@ The javascript and CSS files will be added to the asset pipeline and are availab
 //= require turbolinks-animate
 
 $(document).on( 'turbolinks:load', function() {
-    $('body.turbolinks-animate').turbolinksAnimate();
-    turbolinksAnimateAppear();
-});
-$(document).on( 'turbolinks:request-start', function() {
-    turbolinksAnimateDisappear();
-});
-$(window).on( 'popstate beforeunload', function(event) {
-    turbolinksAnimateDisappear();
+    TurbolinksAnimate.init();
 });
 ```
 
@@ -114,6 +108,10 @@ We hope that you will consider contributing to turbolinks-animate. Please read t
 Give the people some :heart: who are working on this project. See them all at:
 
 https://github.com/jonhue/turbolinks-animate/graphs/contributors
+
+### Semantic Versioning
+
+turbolinks-animate follows Semantic Versioning 2.0 as defined at http://semver.org.
 
 ## License
 
