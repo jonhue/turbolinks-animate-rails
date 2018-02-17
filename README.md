@@ -66,14 +66,14 @@ document.addEventListener( 'turbolinks:load', function() {
 You can use Turbolinks Animate for any element on your page (just one at a time). For the most basic implementation, you should replace your body tag:
 
 ```haml
-= component 'turbolinks-animate', class: 'custom-class' do
+= component 'turbolinks-animate', animation: @turbolinks_animate_animation, class: 'custom-class' do
     = yield
 ```
 
 You can also use a `div` or other elements:
 
 ```haml
-= component 'turbolinks-animate', element: 'div' do
+= component 'turbolinks-animate', animation: @turbolinks_animate_animation, element: 'div' do
     ...
 ```
 
