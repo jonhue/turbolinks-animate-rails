@@ -6,11 +6,13 @@ module TurbolinksAnimate
         initializer 'turbolinks-animate.mozaic' do
             Mozaic.configure do |config|
                 config.define_component 'turbolinks-animate', element: 'body' do |options|
-                    if @turbolinks_animate_animation
+                    animation = options.delete :animation
+                    if animation
                         options[:class] += ( options[:class].length > 0 ? ' turbolinks-animate' : 'turbolinks-animate' )
                         options[:data] ||= {}
-                        options[:data][:turbolinks_animate_animation] = @turbolinks_animate_animation
+                        options[:data][:turbolinks_animate_animation] = animation
                     end
+                    options
                 end
             end
         end
