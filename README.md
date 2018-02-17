@@ -1,4 +1,4 @@
-# turbolinks-animate
+# Turbolinks Animate
 
 [![Gem Version](https://badge.fury.io/rb/turbolinks-animate.svg)](https://badge.fury.io/rb/turbolinks-animate) <img src="https://travis-ci.org/jonhue/turbolinks-animate.svg?branch=master" />
 
@@ -6,7 +6,7 @@ A dead simple & powerful way of adding rich & adaptive animations to your Rails 
 
 This gem extends the [turbolinks-animate.js](https://github.com/jonhue/turbolinks-animate.js) library to work better within Rails apps.
 
-[**Demo**](https://phylator.herokuapp.com)
+[**Demo**](https://phylator.com)
 
 ---
 
@@ -14,6 +14,8 @@ This gem extends the [turbolinks-animate.js](https://github.com/jonhue/turbolink
 
 * [Installation](#installation)
 * [Usage](#usage)
+    * [Views](#views)
+    * [Controllers](#controllers)
 * [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
@@ -24,7 +26,7 @@ This gem extends the [turbolinks-animate.js](https://github.com/jonhue/turbolink
 
 ## Installation
 
-`turbolinks-animate` works with Rails 5 onwards. You can add it to your `Gemfile` with:
+Turbolinks Animate works with Rails 5 onwards. You can add it to your `Gemfile` with:
 
 ```ruby
 gem 'turbolinks-animate'
@@ -44,39 +46,44 @@ If you always want to be up to date fetch the latest from GitHub in your `Gemfil
 gem 'turbolinks-animate', github: 'jonhue/turbolinks-animate'
 ```
 
-## Usage
-
-The javascript and CSS files will be added to the asset pipeline and are available for you to use:
+Now add the `turbolinks-animate` NPM package and import + initialize it:
 
 ```js
-//= require turbolinks-animate
-
-$(document).on( 'turbolinks:load', function() {
-    TurbolinksAnimate.init();
+import 'turbolinks-animate';
+document.addEventListener( 'turbolinks:load', function() {
+    TurbolinksAnimate.init({ element: document.querySelector('body.turbolinks-animate') });
 });
 ```
 
 ```scss
-@import "animate"
+@import "animate.css"
 ```
 
-**Note:** When using a package manager like Yarn, make sure to fetch the latest version instead:
+## Usage
 
-```
-$ yarn install turbolinks-animate
-```
+### Views
 
-To use turbolinks-animate, replace the `body` tag in your layout with the `turbolinks_animate_body` view helper:
+You can use Turbolinks Animate for any element on your page (just one at a time). For the most basic implementation, you should replace your body tag:
 
-```ruby
-= turbolinks_animate_body class: 'custom-class' do
+```haml
+= component 'turbolinks-animate', class: 'custom-class' do
     = yield
 ```
 
-In your controller simply the animation:
+You can also use a `div` or other elements:
+
+```haml
+= component 'turbolinks-animate', element: 'div' do
+    ...
+```
+
+### Controllers
+
+In your controller simply specify the animation:
 
 ```ruby
 class WelcomeController < ApplicationController
+
     def index
         turbolinks_animate 'fadein'
     end
@@ -84,6 +91,7 @@ class WelcomeController < ApplicationController
     def more
         turbolinks_animate({ desktop: 'fadein', mobile: 'fadeinright' })
     end
+
 end
 ```
 
