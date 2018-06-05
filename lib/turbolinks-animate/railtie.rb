@@ -1,4 +1,5 @@
 require 'rails/railtie'
+require 'mozaic'
 
 module TurbolinksAnimate
     class Railtie < Rails::Railtie
