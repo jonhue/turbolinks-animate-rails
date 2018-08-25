@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.authors               = 'Jonas Hübotter'
   gem.email                 = 'me@jonhue.me'
   gem.homepage              = 'https://github.com/jonhue/'\
-                              'turbolinks-animate-ruby'
+                              'turbolinks-animate-rails'
   gem.license               = 'MIT'
 
   gem.files                 = Dir['README.md', 'LICENSE', 'lib/**/*',
